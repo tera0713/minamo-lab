@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ミナモPay｜キャンペーンエントリー（検証用ダミー）</title>
+<!-- ① 設定：APIキーは config.js だけに書く -->
+<script src="config.js"></script>
+<!-- ② Web Experiment と計測のスクリプトを、headのできるだけ上で読み込む（ちらつき防止のため同期） -->
+<script>
+  if (window.AMP_API_KEY && window.AMP_API_KEY.indexOf('YOUR_') !== 0) {
+    document.write('<script src="https://cdn.amplitude.com/script/' + window.AMP_API_KEY + '.experiment.js"><\/script>');
+    document.write('<script src="https://cdn.amplitude.com/script/' + window.AMP_API_KEY + '.js"><\/script>');
+  }
+</script>
+<!-- ③ 計測を始める（Session Replay・Autocapture） -->
+<script src="amp-init.js"></script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%230e7c86%27/%3E%3Ctext x=%2716%27 y=%2722%27 font-size=%2716%27 text-anchor=%27middle%27 fill=%27white%27 font-family=%27sans-serif%27 font-weight=%27700%27%3EM%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body data-page="entry">
+  <div class="demo-bar">検証用のダミーサイトです。ミナモは架空の会社です。本当の個人情報は入力しないでください。</div>
+
+  <header class="site-header">
+    <a class="brand" href="index.html" data-keep-cid>ミナモ<span>Pay</span></a>
+    <nav class="site-nav"><span class="nav-note">キャンペーンエントリー</span></nav>
+  </header>
+
+  <main class="narrow">
+    <ol class="progress" aria-label="手続きの進み具合">
+      <li>会員ID</li><li>支払い方法</li><li>確認</li>
+    </ol>
+
+    <section data-panel="step-1">
+      <h1 class="page-title">1. 会員IDを入力</h1>
+      <label class="field-label" for="member-id">ミナモの会員ID（練習用）</label>
+      <input class="field" id="member-id" name="member-id" type="text" inputmode="latin" autocomplete="off"
+             placeholder="例：MNM0000123">
+      <p class="hint">練習データの会員ID（MNMと7桁の数字）を入れると、Snowflakeで作ったダミー会員の記録とつながります。</p>
+      <p class="error" id="member-id-error" hidden>「MNM」と7桁の数字で入力してください（例：MNM0000123）。</p>
+      <button type="button" class="btn btn-primary" id="next-1">次へ</button>
+    </section>
+
+    <section data-panel="step-2" hidden>
+      <h1 class="page-title">2. 支払い方法を選ぶ</h1>
+      <fieldset class="choices">
+        <legend class="field-label">はじめての決済に使う方法</legend>
+        <label class="choice"><input type="radio" name="method" value="残高"> 残高</label>
+        <label class="choice"><input type="radio" name="method" value="ミナモカード"> ミナモカード</label>
+        <label class="choice"><input type="radio" name="method" value="あと払い"> あと払い</label>
+      </fieldset>
+      <p class="error" id="method-error" hidden>支払い方法を1つ選んでください。</p>
+      <div class="actions">
+        <button type="button" class="btn btn-secondary" data-back="step-1">戻る</button>
+        <button type="button" class="btn btn-primary" id="next-2">次へ</button>
+      </div>
+    </section>
+
+    <section data-panel="step-3" hidden>
+      <h1 class="page-title">3. 内容の確認</h1>
+      <dl class="summary">
+        <dt>会員ID</dt><dd id="confirm-id">―</dd>
+        <dt>支払い方法</dt><dd id="confirm-method">―</dd>
+        <dt>キャンペーン</dt><dd>はじめての決済で20%還元（最大1,000ポイント）</dd>
+      </dl>
+      <label class="choice agree"><input type="checkbox" id="agree"> キャンペーンの注意事項に同意する</label>
+      <p class="error" id="agree-error" hidden>注意事項への同意が必要です。</p>
+      <div class="actions">
+        <button type="button" class="btn btn-secondary" data-back="step-2">戻る</button>
+        <button type="button" class="btn btn-primary" id="submit-entry">エントリーを確定する</button>
+      </div>
+    </section>
+
+    <section data-panel="done" hidden>
+      <h1 class="page-title">エントリーが完了しました</h1>
+      <p>10月31日までに、はじめての決済をすると20%還元の対象になります（架空のキャンペーンです）。</p>
+      <div class="actions">
+        <a class="btn btn-secondary" href="index.html" data-keep-cid>キャンペーンページへ戻る</a>
+        <a class="btn btn-primary" href="plan.html" data-keep-cid
+           data-track="[ミナモモバイル]プラン診断導線クリック" data-place="エントリー完了">料金プランも診断する</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>ミナモ（ミナモPay・ミナモカード・ミナモモバイル）は、Amplitudeの検証のために作った架空のサービスです。</p>
+  </footer>
+</body>
+</html>

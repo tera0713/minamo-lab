@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ミナモモバイル｜料金プラン診断（検証用ダミー）</title>
+<!-- ① 設定：APIキーは config.js だけに書く -->
+<script src="config.js"></script>
+<!-- ② Web Experiment と計測のスクリプトを、headのできるだけ上で読み込む（ちらつき防止のため同期） -->
+<script>
+  if (window.AMP_API_KEY && window.AMP_API_KEY.indexOf('YOUR_') !== 0) {
+    document.write('<script src="https://cdn.amplitude.com/script/' + window.AMP_API_KEY + '.experiment.js"><\/script>');
+    document.write('<script src="https://cdn.amplitude.com/script/' + window.AMP_API_KEY + '.js"><\/script>');
+  }
+</script>
+<!-- ③ 計測を始める（Session Replay・Autocapture） -->
+<script src="amp-init.js"></script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%230e7c86%27/%3E%3Ctext x=%2716%27 y=%2722%27 font-size=%2716%27 text-anchor=%27middle%27 fill=%27white%27 font-family=%27sans-serif%27 font-weight=%27700%27%3EM%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body data-page="plan" class="theme-mobile">
+  <div class="demo-bar">検証用のダミーサイトです。ミナモは架空の会社です。本当の個人情報は入力しないでください。</div>
+
+  <header class="site-header">
+    <a class="brand" href="plan.html" data-keep-cid>ミナモ<span>モバイル</span></a>
+    <nav class="site-nav">
+      <a href="index.html" data-keep-cid data-track="[ミナモPay]キャンペーン導線クリック" data-place="ヘッダー">ミナモPayのキャンペーン</a>
+    </nav>
+  </header>
+
+  <main class="narrow">
+    <section data-panel="form">
+      <h1 class="page-title">あなたに合う料金プランを診断</h1>
+      <p>3つの質問に答えると、おすすめのプランが分かります（30秒）。</p>
+
+      <fieldset class="choices">
+        <legend class="field-label">Q1. 1か月のデータ使用量は？</legend>
+        <label class="choice"><input type="radio" name="usage" value="3GBまで"> 3GBまで</label>
+        <label class="choice"><input type="radio" name="usage" value="20GBまで"> 20GBまで</label>
+        <label class="choice"><input type="radio" name="usage" value="20GBを超える"> 20GBを超える</label>
+      </fieldset>
+
+      <fieldset class="choices">
+        <legend class="field-label">Q2. 通話はどのくらい？</legend>
+        <label class="choice"><input type="radio" name="call" value="ほとんどしない"> ほとんどしない</label>
+        <label class="choice"><input type="radio" name="call" value="ときどき"> ときどき</label>
+        <label class="choice"><input type="radio" name="call" value="よくする"> よくする</label>
+      </fieldset>
+
+      <fieldset class="choices">
+        <legend class="field-label">Q3. 手続きのしかたは？</legend>
+        <label class="choice"><input type="radio" name="shop" value="オンラインで完結したい"> オンラインで完結したい</label>
+        <label class="choice"><input type="radio" name="shop" value="お店で相談したい"> お店で相談したい</label>
+      </fieldset>
+
+      <p class="error" id="plan-error" hidden>3つの質問すべてに答えてください。</p>
+      <button type="button" class="btn btn-primary" id="run-diagnosis">診断する</button>
+    </section>
+
+    <section data-panel="result" hidden>
+      <h1 class="page-title">あなたへのおすすめ</h1>
+      <div class="result-card">
+        <p class="result-plan" id="result-plan">―</p>
+        <p class="result-price" id="result-price">―</p>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-secondary" data-back="form">やり直す</button>
+        <button type="button" class="btn btn-primary" id="apply-plan">このプランに変更する</button>
+      </div>
+    </section>
+
+    <section data-panel="applied" hidden>
+      <h1 class="page-title">プラン変更の申し込みを受け付けました</h1>
+      <p>来月1日から新しいプランになります（架空の手続きです）。</p>
+      <div class="actions">
+        <a class="btn btn-secondary" href="index.html" data-keep-cid>ミナモPayのキャンペーンを見る</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>ミナモ（ミナモPay・ミナモカード・ミナモモバイル）は、Amplitudeの検証のために作った架空のサービスです。</p>
+  </footer>
+</body>
+</html>
